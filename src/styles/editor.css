@@ -1,0 +1,10 @@
+.editor {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+
+.heading {
+    font-family: "Poetsen One", sans-serif;
+}
