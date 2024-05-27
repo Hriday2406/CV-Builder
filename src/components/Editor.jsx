@@ -2,63 +2,31 @@ import { useState } from "react";
 import '../styles/editor.css'
 import PersonalInfoEditor from "./PersonalInfoEditor";
 import InfoEditorComponent from "./InfoEditorComponent";
+import {samplePersonalInfo, sampleEducationInfo, sampleDetails2, sampleDetails3, emptyPersonalInfo, emptyDetails} from "./sampleDetails";
 
-function Editor() {
-    const samplePersonalInfo = {
-        fName: "Hriday",
-        lName: "Budhiraja",
-        email: "hriday2602@gmail.com",
-        phone: "9958026543",
-        place: "Delhi, India",
-        extras: ["github.com/Hriday2406"]
-    };
-    const emptyPersonalInfo = {
-        fName: " ",
-        lName: " ",
-        email: " ",
-        phone: " ",
-        place: " ",
-        extras: [ ]
-    };
-    const sampleDetails = [
-        {
-        name: "School",
-        time: "Mar 2006 - Mar 2021",
-        description: "Above average scores in both 10th and 12th",
-        details: ["85% in 10th", "90% in 12th"]
-        }
-    ];
-    const sampleDetails2 = [
-        {
-        name: "School",
-        time: "Mar 2006 - Mar 2021",
-        description: "Above average scores in both 10th and 12th",
-        details: ["85% in 10th", "90% in 12th"]
-        },
-        {
-            name: "School",
-            time: "Mar 2006 - Mar 2021",
-            description: "Above average scores in both 10th and 12th",
-            details: ["85% in 10th", "90% in 12th"]
-        }
-    ];
-
-    const [personalInfo, setPersonalInfo] = useState(samplePersonalInfo);
-    const [educationInfo, setEducationInfo] = useState(sampleDetails);
-    const [experienceInfo, setExperienceInfo] = useState(sampleDetails2);
+function Editor({ personalInfo, setPersonalInfo, educationInfo, setEducationInfo, experienceInfo, setExperienceInfo, projectsInfo, setProjectsInfo }) {
 
     return (
         <div className="editor">
             <h1 className="heading">BUILD YOUR OWN RESUME</h1>
             <div className="editorBtns">
                 <button
-                    onClick={() => {setPersonalInfo(emptyPersonalInfo)}}
+                    onClick={() => {
+                        setPersonalInfo(emptyPersonalInfo);
+                        setEducationInfo(emptyDetails);
+                        setExperienceInfo(emptyDetails);
+                        setProjectsInfo(emptyDetails);
+                    }}
                 >
                     New
                 </button>
                 <button
-                    // onClick={() => {setPersonalInfo(samplePersonalInfo)}}
-                    onClick={() => {console.log(personalInfo)}}
+                    onClick={() => {
+                        setPersonalInfo(samplePersonalInfo);
+                        setEducationInfo(sampleEducationInfo);
+                        setExperienceInfo(sampleDetails2);
+                        setProjectsInfo(sampleDetails3);
+                    }}
                 >
                     Sample
                 </button>
@@ -79,6 +47,12 @@ function Editor() {
                 title={'Experience'}
                 infoArr={experienceInfo}
                 setInfoArr={setExperienceInfo}
+            />
+            <hr />
+            <InfoEditorComponent
+                title={'Projects'}
+                infoArr={projectsInfo}
+                setInfoArr={setProjectsInfo}
             />
         </div>
     )

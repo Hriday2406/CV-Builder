@@ -1,15 +1,6 @@
+import { useState } from "react";
+
 function DetailsComponent({ infoArr,setInfoArr,index }) {
-
-    // function handleNameChange(e) {
-    //     setInfo({...info, name: e.target.value});
-    // }
-    // function handleTimeChange(e) {
-    //     setInfo({...info, time: e.target.value});
-    // }
-    // function handleDescriptionChange(e) {
-    //     setInfo({...info, description: e.target.value});
-    // }
-
     function handleInputChange(e, index) {
         const {name, value} = e.target;
         let stateArr = [...infoArr];
@@ -19,7 +10,16 @@ function DetailsComponent({ infoArr,setInfoArr,index }) {
 
     return (
         <div className="detailsContainer">
-            <button className="deleteBtn">'X'</button>
+            <button 
+                className="deleteBtn"
+                onClick={() => {
+                    let arr = [...infoArr];
+                    arr.splice(index, 1);
+                    setInfoArr(arr);
+                }}
+            >
+                'X'
+            </button>
             <div className="editorFields" style={{
                 display: 'flex',
                 flexDirection: 'column'
@@ -34,7 +34,6 @@ function DetailsComponent({ infoArr,setInfoArr,index }) {
                         onChange={(e) => {
                             handleInputChange(e, index)
                         }}
-                        // onChange={handleNameChange}
                     />
                 </div>
                 <div className="formFields">
@@ -47,7 +46,6 @@ function DetailsComponent({ infoArr,setInfoArr,index }) {
                         onChange={(e) => {
                             handleInputChange(e, index)
                         }}
-                        // onChange={handleTimeChange}
                     />
                 </div>
                 <div className="formFields">
@@ -60,7 +58,6 @@ function DetailsComponent({ infoArr,setInfoArr,index }) {
                         onChange={(e) => {
                             handleInputChange(e, index)
                         }}
-                        // onChange={handleDescriptionChange}
                     />
                 </div>
 
@@ -96,7 +93,7 @@ function DetailsComponent({ infoArr,setInfoArr,index }) {
                     )
                 })}
                 <button
-                    onClick={(e) => {
+                    onClick={() => {
                         let arr = infoArr[index].details;
                         arr.push(' ');
 
@@ -113,18 +110,45 @@ function DetailsComponent({ infoArr,setInfoArr,index }) {
 }
 
 function InfoEditorComponent({ title, infoArr, setInfoArr}) {
+    const [showInfo, setShowInfo] = useState(false);
+
     return (
         <div className="editorComponent">
             <div className="componentTitle" style={{
                 display: 'flex'
             }}>
                 <h2>{title}</h2>
-                <button className="closeBtn">'V'</button>
+                <button 
+                    className="closeBtn"
+                    onClick={() => {
+                        setShowInfo(!showInfo);
+                    }}
+                >
+                    'V'
+                </button>
             </div>
 
-            {infoArr.map((info, index) => {
-                return <DetailsComponent infoArr={infoArr} setInfoArr={setInfoArr} index={index} />;
-            })}
+            {showInfo && (
+                <>
+                    {infoArr.map((info, index) => {
+                        return <DetailsComponent infoArr={infoArr} setInfoArr={setInfoArr} index={index} key={title + index} />;
+                    })}
+                    <button
+                        onClick={() => {
+                            let arr = [...infoArr];
+                            arr.push({
+                                name: " ",
+                                time: " ",
+                                description: " ",
+                                details: [" "]
+                            });
+                            setInfoArr(arr);
+                        }}
+                    >
+                        Add
+                    </button>
+                </>
+            )}
         </div>
     )
 }

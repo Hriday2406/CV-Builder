@@ -48,5 +48,6 @@ body {
 }
 
 #root {
-    display: flex;
+    display: grid;
+	grid-template-columns: 3fr 7fr;
 }
