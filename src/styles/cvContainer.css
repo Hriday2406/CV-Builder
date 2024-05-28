@@ -1,0 +1,65 @@
+.cvContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+hr {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    font-family: 'serif';
+    width: 800px;
+    /* height: 1000px; */
+    height: fit-content;
+    padding: 50px 20px;
+    margin: 50px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.personalInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+.personalInfo h1{
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+.personalInfoList {
+    display: flex;
+    gap: 25px;
+    list-style-type: disc;
+}
+
+/*  */
+
+.categoryContainer h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.firstLine {
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+
+.infoContainer+.infoContainer {
+    margin-top: 1em;
+}
+
+.infoDescription {
+    font-style: italic;
+}
+
+.infoDetails {
+    padding-left: 1em;
+    list-style-type: disc;
+}

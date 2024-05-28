@@ -1,16 +1,16 @@
-import { useState } from "react";
 import '../styles/editor.css'
 import PersonalInfoEditor from "./PersonalInfoEditor";
 import InfoEditorComponent from "./InfoEditorComponent";
-import {samplePersonalInfo, sampleEducationInfo, sampleDetails2, sampleDetails3, emptyPersonalInfo, emptyDetails} from "./sampleDetails";
+import {samplePersonalInfo, sampleEducationInfo, sampleExperienceInfo, sampleProjectInfo, emptyPersonalInfo, emptyDetails} from "./sampleDetails";
 
-function Editor({ personalInfo, setPersonalInfo, educationInfo, setEducationInfo, experienceInfo, setExperienceInfo, projectsInfo, setProjectsInfo }) {
+export default function Editor({ personalInfo, setPersonalInfo, educationInfo, setEducationInfo, experienceInfo, setExperienceInfo, projectsInfo, setProjectsInfo }) {
 
     return (
         <div className="editor">
-            <h1 className="heading">BUILD YOUR OWN RESUME</h1>
+            <h1 className="heading">Build Your Resume</h1>
             <div className="editorBtns">
                 <button
+                    className="btn"
                     onClick={() => {
                         setPersonalInfo(emptyPersonalInfo);
                         setEducationInfo(emptyDetails);
@@ -18,17 +18,18 @@ function Editor({ personalInfo, setPersonalInfo, educationInfo, setEducationInfo
                         setProjectsInfo(emptyDetails);
                     }}
                 >
-                    New
+                    New CV
                 </button>
                 <button
+                    className="btn"
                     onClick={() => {
                         setPersonalInfo(samplePersonalInfo);
                         setEducationInfo(sampleEducationInfo);
-                        setExperienceInfo(sampleDetails2);
-                        setProjectsInfo(sampleDetails3);
+                        setExperienceInfo(sampleExperienceInfo);
+                        setProjectsInfo(sampleProjectInfo);
                     }}
                 >
-                    Sample
+                    Sample CV
                 </button>
             </div>
 
@@ -36,21 +37,18 @@ function Editor({ personalInfo, setPersonalInfo, educationInfo, setEducationInfo
                 pInfo={personalInfo}
                 setPInfo={setPersonalInfo}
             />
-            <hr />
             <InfoEditorComponent
-                title={'Education'}
+                title='Education'
                 infoArr={educationInfo}
                 setInfoArr={setEducationInfo}
             />
-            <hr />
             <InfoEditorComponent
-                title={'Experience'}
+                title='Experience'
                 infoArr={experienceInfo}
                 setInfoArr={setExperienceInfo}
             />
-            <hr />
             <InfoEditorComponent
-                title={'Projects'}
+                title='Projects'
                 infoArr={projectsInfo}
                 setInfoArr={setProjectsInfo}
             />
@@ -58,5 +56,3 @@ function Editor({ personalInfo, setPersonalInfo, educationInfo, setEducationInfo
     )
 
 }
-
-export default Editor;

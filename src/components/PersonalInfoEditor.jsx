@@ -1,8 +1,26 @@
 import { useState } from "react";
+import Icon from '@mdi/react';
+import { mdiChevronDown,mdiChevronUp,mdiDelete,mdiLinkVariant } from '@mdi/js';
 
-function PersonalInfoEditor({ pInfo, setPInfo }) {
+function FormFieldComponent({ id,title,value,handleInputChange }) {
+    return (
+        <div className="formFields">
+            <label htmlFor={id}>{title}</label>
+            <input 
+                type="text"
+                id={id} 
+                name={id}
+                value={value}
+                onChange={handleInputChange}
+            />
+        </div>
+    )
+}
+
+export default function PersonalInfoEditor({ pInfo, setPInfo }) {
 
     const [showPersonalInfo, setshowPersonalInfo] = useState(false);
+    const [isLink, setIsLink] = useState(false);
 
     function handleInputChange(e) {
         const {name, value} = e.target;
@@ -11,90 +29,74 @@ function PersonalInfoEditor({ pInfo, setPInfo }) {
 
     return (
         <div className="personal editorComponent">
-            <div className="componentTitle" style={{
-                display: 'flex'
-            }}>
+            <div className="componentTitle" >
                 <h2>Personal Information</h2>
                 <button 
-                    className="closeBtn"
+                    className="closeBtn btn"
                     onClick={() => {
                         setshowPersonalInfo(!showPersonalInfo);
                     }}
                 >
-                    'V'
+                    {showPersonalInfo ? <Icon path={mdiChevronUp} size={1.5} /> : <Icon path={mdiChevronDown} size={1.5} />}
+                    
                 </button>
             </div>
-
             {showPersonalInfo && (
                 <>
-                    <div className="personalFields" style={{
-                        display: 'flex',
-                        flexDirection: 'column'
-                    }}>
-                        <div className="formFields">
-                            <label htmlFor="fName">First Name</label>
-                            <input 
-                                type="text" 
-                                id="fName" 
-                                name="fName"
-                                value={pInfo.fName}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div className="formFields">
-                            <label htmlFor="lName">Last Name</label>
-                            <input 
-                                type="text" 
-                                id="lName" 
-                                name="lName"
-                                value={pInfo.lName}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div className="formFields">
-                            <label htmlFor="email">Email</label>
-                            <input 
-                                type="text" 
-                                id="email" 
-                                name="email"
-                                value={pInfo.email}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div className="formFields">
-                            <label htmlFor="phone">Phone</label>
-                            <input 
-                                type="text" 
-                                id="phone" 
-                                name="phone"
-                                value={pInfo.phone}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div className="formFields">
-                            <label htmlFor="place">Place</label>
-                            <input 
-                                type="text" 
-                                id="place" 
-                                name="place"
-                                value={pInfo.place}
-                                onChange={handleInputChange}
-                            />
-                        </div>
+                    <div className="personalFields inputFields" >
+                        <FormFieldComponent
+                            id='fName'
+                            title='First Name'
+                            value={pInfo.fName}
+                            handleInputChange={handleInputChange}
+                        />
+                        <FormFieldComponent
+                            id='lName'
+                            title='Last Name'
+                            value={pInfo.lName}
+                            handleInputChange={handleInputChange}
+                        />
+                        <FormFieldComponent
+                            id='email'
+                            title='Email'
+                            value={pInfo.email}
+                            handleInputChange={handleInputChange}
+                        />
+                        <FormFieldComponent
+                            id='phone'
+                            title='Phone'
+                            value={pInfo.phone}
+                            handleInputChange={handleInputChange}
+                        />
+                        <FormFieldComponent
+                            id='place'
+                            title='Place'
+                            value={pInfo.place}
+                            handleInputChange={handleInputChange}
+                        />
 
                         {pInfo.extras.map((detail, index) => {
                             return (
                                 <div className="formFields" key={index}>
-                                    <button
-                                        onClick={() => {
-                                            let arr = pInfo.extras;
-                                            arr.splice(index, 1);
-                                            setPInfo({...pInfo, extras: arr});
-                                        }}
-                                    >
-                                        X
-                                    </button>
-                                    <span>New Contact {index + 1}</span>
+                                    <div style={{display:'flex', alignItems:'center', gap:'5px'}}>
+                                        <button
+                                            className="deleteBtn btn"
+                                            onClick={() => {
+                                                let arr = pInfo.extras;
+                                                arr.splice(index, 1);
+                                                setPInfo({...pInfo, extras: arr});
+                                            }}
+                                        >
+                                            <Icon path={mdiDelete} size={0.9} style={{color:'red'}}/>
+                                        </button>
+                                        <span>New Contact {index + 1}</span>
+                                        <button
+                                            className="linkBtn btn"
+                                            onClick={() => { setIsLink(!isLink) }}
+                                        >
+                                            <Icon path={mdiLinkVariant} size={0.8} />
+                                        </button>
+                                    </div>
                                     <input 
                                         type="text" 
                                         value={detail}
@@ -110,6 +112,7 @@ function PersonalInfoEditor({ pInfo, setPInfo }) {
                         })}
                     </div>
                     <button
+                        className="addNewBtn btn"
                         onClick={(e) => {
                             let arr = pInfo.extras;
                             arr.push(' ');
@@ -117,14 +120,10 @@ function PersonalInfoEditor({ pInfo, setPInfo }) {
                             setPInfo({...pInfo, extras: arr});
                         }}
                     >
-                        Add New
+                        Add New Contact
                     </button>
                 </>
             )}
-
-            
         </div>
     )
 }
-
-export default PersonalInfoEditor;

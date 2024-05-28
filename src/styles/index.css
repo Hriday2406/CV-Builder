@@ -42,12 +42,42 @@ table {
 	border-spacing: 0;
 }
 
+* {
+	box-sizing: border-box;
+}
+
 body {
     font-family: "Roboto", sans-serif;
     background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+	background-attachment: fixed;
 }
 
 #root {
-    display: grid;
-	grid-template-columns: 3fr 7fr;
+	min-height: 100vh;
+    display: flex;
+}
+
+/* Scroll Bar */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #c3cfe2;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: white;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: white; 
 }
