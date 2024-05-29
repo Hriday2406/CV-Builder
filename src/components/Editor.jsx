@@ -3,7 +3,7 @@ import PersonalInfoEditor from "./PersonalInfoEditor";
 import InfoEditorComponent from "./InfoEditorComponent";
 import {samplePersonalInfo, sampleEducationInfo, sampleExperienceInfo, sampleProjectInfo, emptyPersonalInfo, emptyDetails} from "./sampleDetails";
 
-export default function Editor({ personalInfo, setPersonalInfo, educationInfo, setEducationInfo, experienceInfo, setExperienceInfo, projectsInfo, setProjectsInfo }) {
+export default function Editor({ personalInfo, setPersonalInfo, educationInfo, setEducationInfo, experienceInfo, setExperienceInfo, projectsInfo, setProjectsInfo, isLinksArr, setIsLinksArr }) {
 
     return (
         <div className="editor">
@@ -36,6 +36,8 @@ export default function Editor({ personalInfo, setPersonalInfo, educationInfo, s
             <PersonalInfoEditor 
                 pInfo={personalInfo}
                 setPInfo={setPersonalInfo}
+                isLinksArr={isLinksArr}
+                setIsLinksArr={setIsLinksArr}
             />
             <InfoEditorComponent
                 title='Education'

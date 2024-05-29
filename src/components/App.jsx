@@ -8,25 +8,29 @@ function App() {
     const [educationInfo, setEducationInfo] = useState(sampleEducationInfo);
     const [experienceInfo, setExperienceInfo] = useState(sampleExperienceInfo);
     const [projectsInfo, setProjectsInfo] = useState(sampleProjectInfo);
+    const [isLinksArr, setIsLinksArr] = useState([{status:true, text:'My Github'}, {status:false, text:''}]);
 
     return (
         <>
-        <Editor 
-            personalInfo={personalInfo}
-            setPersonalInfo={setPersonalInfo}
-            educationInfo={educationInfo}
-            setEducationInfo={setEducationInfo}
-            experienceInfo={experienceInfo}
-            setExperienceInfo={setExperienceInfo}
-            projectsInfo={projectsInfo}
-            setProjectsInfo={setProjectsInfo}
-        />
-        <CvContainer 
-            personalInfo={personalInfo}
-            educationInfo={educationInfo}
-            experienceInfo={experienceInfo}
-            projectsInfo={projectsInfo}
-        />
+            <Editor 
+                personalInfo={personalInfo}
+                setPersonalInfo={setPersonalInfo}
+                educationInfo={educationInfo}
+                setEducationInfo={setEducationInfo}
+                experienceInfo={experienceInfo}
+                setExperienceInfo={setExperienceInfo}
+                projectsInfo={projectsInfo}
+                setProjectsInfo={setProjectsInfo}
+                isLinksArr={isLinksArr}
+                setIsLinksArr={setIsLinksArr}
+            />
+            <CvContainer 
+                personalInfo={personalInfo}
+                educationInfo={educationInfo}
+                experienceInfo={experienceInfo}
+                projectsInfo={projectsInfo}
+                isLinksArr={isLinksArr}
+            />
         </>
     );
 

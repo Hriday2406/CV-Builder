@@ -17,10 +17,10 @@ function FormFieldComponent({ id,title,value,handleInputChange }) {
     )
 }
 
-export default function PersonalInfoEditor({ pInfo, setPInfo }) {
+export default function PersonalInfoEditor({ pInfo, setPInfo, isLinksArr, setIsLinksArr }) {
 
     const [showPersonalInfo, setshowPersonalInfo] = useState(false);
-    const [isLink, setIsLink] = useState(false);
+    // const [isLink, setIsLink] = useState(false);
 
     function handleInputChange(e) {
         const {name, value} = e.target;
@@ -85,6 +85,9 @@ export default function PersonalInfoEditor({ pInfo, setPInfo }) {
                                                 let arr = pInfo.extras;
                                                 arr.splice(index, 1);
                                                 setPInfo({...pInfo, extras: arr});
+                                                let newArr = [...isLinksArr];
+                                                newArr.splice(index, 1);
+                                                setIsLinksArr(newArr);
                                             }}
                                         >
                                             <Icon path={mdiDelete} size={0.9} style={{color:'red'}}/>
@@ -92,32 +95,61 @@ export default function PersonalInfoEditor({ pInfo, setPInfo }) {
                                         <span>New Contact {index + 1}</span>
                                         <button
                                             className="linkBtn btn"
-                                            onClick={() => { setIsLink(!isLink) }}
+                                            onClick={() => { 
+                                                let newArr = [...isLinksArr];
+                                                newArr[index].status = !newArr[index].status;
+                                                setIsLinksArr(newArr);
+                                                let arr = pInfo.extras;
+                                                arr[index] = "";
+                                                setPInfo({...pInfo, extras: arr});
+                                                let newArr1 = [...isLinksArr];
+                                                newArr1[index].text = "";
+                                                setIsLinksArr(newArr1);
+                                            }}
                                         >
                                             <Icon path={mdiLinkVariant} size={0.8} />
                                         </button>
                                     </div>
-                                    <input 
-                                        type="text" 
-                                        value={detail}
-                                        name={'extras ' + index}
-                                        onChange={(e) => {
-                                            let arr = pInfo.extras;
-                                            arr[index] = e.target.value;
-                                            setPInfo({...pInfo, extras: arr});
-                                        }}
-                                    />
+                                    <div className="inputLinkFields">
+                                        <input
+                                            type="text"
+                                            placeholder={isLinksArr[index].status ? "Link" : "" }
+                                            value={detail}
+                                            name={'extras ' + index}
+                                            onChange={(e) => {
+                                                let arr = pInfo.extras;
+                                                arr[index] = e.target.value;
+                                                setPInfo({...pInfo, extras: arr});
+                                            }}
+                                        />
+                                        {isLinksArr[index].status ?
+                                            (<input
+                                                type="text"
+                                                placeholder="Text"
+                                                value={isLinksArr[index].text}
+                                                onChange={(e) => {
+                                                    let newArr = [...isLinksArr];
+                                                    newArr[index].text = e.target.value;
+                                                    setIsLinksArr(newArr);
+                                                }}
+                                            />)
+                                        :
+                                            (null)
+                                        }
+                                    </div>
                                 </div>
                             )
                         })}
                     </div>
                     <button
                         className="addNewBtn btn"
-                        onClick={(e) => {
+                        onClick={() => {
                             let arr = pInfo.extras;
                             arr.push(' ');
-
                             setPInfo({...pInfo, extras: arr});
+                            let newArr = [...isLinksArr];
+                            newArr.push({status:false, text:''});
+                            setIsLinksArr(newArr);
                         }}
                     >
                         Add New Contact

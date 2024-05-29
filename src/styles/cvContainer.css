@@ -37,6 +37,9 @@ hr {
     gap: 25px;
     list-style-type: disc;
 }
+a {
+    font-weight: bold;
+}
 
 /*  */
 

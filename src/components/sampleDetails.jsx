@@ -20,7 +20,7 @@ const samplePersonalInfo = {
     email: "hriday2602@gmail.com",
     phone: "9958026543",
     place: "Delhi, India",
-    extras: ["github.com/Hriday2406", "@Hriday2406"]
+    extras: ["https://github.com/Hriday2406", "@Hriday2406"]
 };
 const sampleEducationInfo = [
     {

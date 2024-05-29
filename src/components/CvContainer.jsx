@@ -27,7 +27,7 @@ function DisplayInfo({ title,state,classes }) {
     )
 }
 
-export default function CvContainer({ personalInfo, educationInfo, experienceInfo, projectsInfo }) {
+export default function CvContainer({ personalInfo, educationInfo, experienceInfo, projectsInfo, isLinksArr }) {
     return (
         <div className='cvContainer'>
             <div className="container" >
@@ -40,9 +40,18 @@ export default function CvContainer({ personalInfo, educationInfo, experienceInf
                     </ul>
                     <ul className='personalInfoList' >
                         {personalInfo.extras.map((detail, index) => {
-                            if(index == 0)
-                                return <li key={'personalInfo '+index}  style={{listStyleType: 'none'}} >{detail}</li>;
-                            return <li key={'personalInfo '+index} >{detail}</li>;
+                            if(index == 0){
+                                return (
+                                    <li key={'personalInfo '+index}  style={{listStyleType: 'none'}} >
+                                        {isLinksArr[index].status ? <a href={detail} target='_blank' >{isLinksArr[index].text}</a> : detail}
+                                    </li>
+                                )
+                            }
+                            return (
+                                <li key={'personalInfo '+index} >
+                                    {isLinksArr[index].status ? <a href={detail} target='_blank' >{isLinksArr[index].text}</a> : detail}
+                                </li>
+                            )
                         })}
                     </ul>
                 </div> 
